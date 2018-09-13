@@ -13,7 +13,7 @@ app.use((req, res, next) => {
     var now = new Date().toString();
     var log = `${now}: ${req.method} ${req.url}`;
     console.log(log);
-    fs.appendFile('server.log', log + '--' + port + '\n', (err) => {
+    fs.appendFile('server.log', log + '\n', (err) => {
         if (err){
             console.log('Unable to append to log server')
         }
@@ -64,5 +64,10 @@ app.get('/bad', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`);
+    fs.appendFile('server.log', 'Running port is ' + port + '\n', (err) => {
+        if (err){
+            console.log('Unable to append to log server')
+        }
+    });
 });
  
